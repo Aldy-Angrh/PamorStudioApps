@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, FlatList, Image, Text, TouchableOpacity, View,ImageBackground } from 'react-native'
 import React, { Component } from 'react'
 import HeaderComponent from '../components/HeaderComponent'
 import { DataCrousel, fonts } from '../config/utils'
@@ -30,7 +30,7 @@ export class DashboardScreen extends Component {
       };
   render() {
     return (
-      <View>
+      <ImageBackground source={require("../assets/image/bg.jpg")} style={{flex:1, }}>
         <HeaderComponent />
             <ImagedCarouselCard 
             height={230}
@@ -80,7 +80,7 @@ export class DashboardScreen extends Component {
         />
         </View>
 
-      </View>
+      </ImageBackground>
     )
   }
 }

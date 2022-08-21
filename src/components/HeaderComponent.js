@@ -64,7 +64,7 @@ class HeaderComponent extends Component {
             {/* <IconCari /> */}
             <Image source={require('../assets/icons/IconCari.png')} style={{height:20, width:20}}/>
             <TextInput
-              placeholder="Pencarian Layanan Tempat..."
+              placeholder="Pencarian..."
               style={styles.input}
               value={search}
               onChangeText={(search) => this.setState({search})}
@@ -112,12 +112,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: colors.white,
-    borderRadius: 5,
-    paddingLeft: 2,
+    borderRadius: 20,
+    paddingLeft: 10,
+    height:30,
+    marginTop:10,
     alignItems: 'center',
   },
   input: {
     fontSize: 13,
+    height:40,
     fontFamily: fonts.primary.regular,
   },
 });
