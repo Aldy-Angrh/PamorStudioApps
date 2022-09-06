@@ -7,37 +7,83 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
+import { GetProfile } from '../action/postSlice';
+import { bindActionCreators } from 'redux';
 
 
+function mapStateToProps(state) {
+  console.log('ISI STATE mapStateToPROPS di Profile :', state);
+  return {
+    dataLogin: state.posts.data,
+    dataProfile: state.posts.profileData
+  };
+}
 const width = Dimensions.get('window').width;
+// const dispatch = useDispatch()
 export class ProfileScreen extends Component {
+
+  componentDidMount(){
+    this.initialMount()
+  }
+
+  initialMount(){
+    console.log("ISI datalogin ", this.props.dataLogin);
+    const {dataLogin} = this.props
+    if (dataLogin) {
+        this.props.GetProfile(dataLogin.access_token)
+    }
+  }
   render() {
+    const {dataProfile}= this.props
     return (
       <View style={{flex: 1}}>
+        {dataProfile?  (
+          <>
         <View style={styles.containerUp}>
+          <TouchableOpacity onPress={()=>this.props.navigation.navigate("Dashboard")}>
+          <Image source={require('../assets/icons/left.png')} style={{width:20, height:20, alignSelf:'flex-start',marginBottom:-25, marginLeft:10}} />
+          </TouchableOpacity>
           <Image
             source={require('../assets/icons/notif.png')}
             style={styles.iconNotif}
           />
+          <Text style={{alignSelf:'center', fontSize:20, fontWeight:'bold', color:'#FFF'}}>{dataProfile.user.name}</Text>
         </View>
         <View style={{}}>
           <Image
-            source={require('../assets/icons/user.png')}
-            style={{position: 'absolute', marginTop: -50}}
+            source={require('../assets/icons/hacker.png')}
+            style={{position: 'absolute', marginTop: -30, backgroundColor:'#FFF',borderRadius:50, borderColor:'#000', borderWidth:1}}
           />
-          <Text
-            style={{
-              alignSelf: 'center',
-              fontWeight: '700',
-              fontSize: 20,
-              color: '#130b1e',
+          <View  style={{
+              alignSelf: 'flex-end',
+              width:"80%",
+              height:50,
+              flexDirection:'row',
+              justifyContent:'space-evenly'
             }}>
-            Login
-          </Text>
+              <View style={{flexDirection:'column', justifyContent:'space-evenly'}}>
+                <Text style={styles.txt}>{dataProfile.total_token}</Text>
+                <Text style={styles.txt}>$MORE</Text>
+
+              </View>
+              <View style={{flexDirection:'column', justifyContent:'space-evenly'}}>
+                <Text style={styles.txt}>{dataProfile.user.membership_package}</Text>
+                <Text style={styles.txt}>Mambership</Text>
+
+              </View>
+              <View style={{flexDirection:'column', justifyContent:'space-evenly'}}>
+                <Text style={styles.txt}>{dataProfile.total_poin_referral}</Text>
+                <Text style={styles.txt}>Pain</Text>
+
+              </View>
+             
+         
+              </View>
 
           <TouchableOpacity
             style={{
-              width: '80%',
+              width: '90%',
               height: 70,
               backgroundColor: '#130b1e',
               marginTop: 30,
@@ -51,7 +97,7 @@ export class ProfileScreen extends Component {
             <View style={{flexDirection: 'row'}}>
               <Text style={{color: '#FFF', fontWeight: 'bold', fontSize: 20}}>
                 {' '}
-                Join Mambership
+                Upgrade Mambership
               </Text>
               <Image source={require('../assets/icons/arrow-white.png')} />
             </View>
@@ -64,7 +110,36 @@ export class ProfileScreen extends Component {
           style={{
             borderTopColor: '#BBB',
             borderTopWidth: 1,
-            marginVertical: 15,
+            borderBottomColor: '#BBB',
+            borderBottomWidth: 1,
+            marginTop:15,
+            width: '90%',
+            alignSelf: 'center',
+            height: 40,
+            justifyContent: 'center',
+          }}>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: 20,
+            }}
+            onPress={()=>this.props.navigation.navigate("DetailProfile")}
+            >
+            <Text style={{color: '#130b1e', fontWeight: 'bold', fontSize: 15}}>
+              Profile
+            </Text>
+            <Image
+              source={require('../assets/icons/right-arrow.png')}
+              style={{width: 20, height: 20}}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            borderTopColor: '#BBB',
+            borderTopWidth: 1,
+            marginVertical: 0,
             borderBottomColor: '#BBB',
             borderBottomWidth: 1,
             width: '90%',
@@ -92,84 +167,9 @@ export class ProfileScreen extends Component {
           />
           <Text style={{color: '#130b1e'}}>Judul Film</Text>
         </View>
-        <View
-          style={{
-            borderTopColor: '#BBB',
-            borderTopWidth: 1,
-            borderBottomColor: '#BBB',
-            borderBottomWidth: 1,
-            width: '90%',
-            alignSelf: 'center',
-            height: 40,
-            justifyContent: 'center',
-          }}>
-          <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: 20,
-            }}>
-            <Text style={{color: '#130b1e', fontWeight: 'bold', fontSize: 15}}>
-              Download
-            </Text>
-            <Image
-              source={require('../assets/icons/right-arrow.png')}
-              style={{width: 20, height: 20}}
-            />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            borderTopColor: '#BBB',
-            borderTopWidth: 1,
-            borderBottomColor: '#BBB',
-            borderBottomWidth: 1,
-            width: '90%',
-            alignSelf: 'center',
-            height: 40,
-            justifyContent: 'center',
-          }}>
-          <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: 20,
-            }}>
-            <Text style={{color: '#130b1e', fontWeight: 'bold', fontSize: 15}}>
-              Watchlist & Reservation
-            </Text>
-            <Image
-              source={require('../assets/icons/right-arrow.png')}
-              style={{width: 20, height: 20}}
-            />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            borderTopColor: '#BBB',
-            borderTopWidth: 1,
-            borderBottomColor: '#BBB',
-            borderBottomWidth: 1,
-            width: '90%',
-            alignSelf: 'center',
-            height: 40,
-            justifyContent: 'center',
-          }}>
-          <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: 20,
-            }}>
-            <Text style={{color: '#130b1e', fontWeight: 'bold', fontSize: 15}}>
-              Help & Reports
-            </Text>
-            <Image
-              source={require('../assets/icons/right-arrow.png')}
-              style={{width: 20, height: 20}}
-            />
-          </TouchableOpacity>
-        </View>
+        
+      
+      
         <View
           style={{
             borderTopColor: '#BBB',
@@ -196,18 +196,28 @@ export class ProfileScreen extends Component {
             />
           </TouchableOpacity>
         </View>
+        </>):<View><Text>DATA KOSOGN</Text></View>}
       </View>
     );
   }
 }
 
-export default ProfileScreen;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      GetProfile,
+    },
+    dispatch,
+  );
+}
+export default connect(mapStateToProps,mapDispatchToProps)( ProfileScreen);
 const styles = StyleSheet.create({
   containerUp: {
     backgroundColor: '#293462',
-    height: '20%',
+    height: 72,
     width: width,
     justifyContent: 'center',
+    flexDirection:'column',
     paddingRight: 20,
   },
   iconNotif: {
@@ -215,4 +225,8 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
+  txt:{
+    color:'#BBB',
+    textAlign:'center'
+  }
 });

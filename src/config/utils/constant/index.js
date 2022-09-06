@@ -8,6 +8,7 @@ export const API_HEADER_RAJAONGKIR = {
   key: API_KEY,
 };
 
+export const API_URL = "https://api.pamorstudio.com/api/"
 export const API_HEADER_RAJAONGKIR_COST = {
   key: API_KEY,
   'content-type': 'application/x-www-form-urlencoded',
@@ -26,39 +27,39 @@ export const URL_MIDTRANS_STATUS = 'https://api.sandbox.midtrans.com/v2/';
 
 export const DataCrousel = [
   {id:1,
-    gambar:
+    img:
       'https://dev.pamorstudio.com/assets/img/shop/c412ce0c39f4cadd760d70a097268a97.jpg',
   },
   {id:2,
-    gambar:
+    img:
       'https://dev.pamorstudio.com/assets/img/shop/2cad99a9cf6b48d8e6eabedca0704720.jpg',
   },
   {id:3,
-    gambar:
+    img:
       'https://dev.pamorstudio.com/assets/img/shop/0ca849faf3a417ed2b60465ed1bfd42d.jpg',
   },
   {id:4,
-    gambar:
+    img:
       'https://dev.pamorstudio.com/assets/img/shop/4f38b32d0f47082be16b0256bd438fab.jpg',
   },
   {id:5,
-    gambar:
+    img:
       'https://dev.pamorstudio.com/assets/img/shop/0ff16478d4f59b55013c8adaf93ffa58.jpg',
   },
   {id:6,
-    gambar: 'https://dev.pamorstudio.com/assets/img/shop/jump.jpg',
+    img: 'https://dev.pamorstudio.com/assets/img/shop/jump.jpg',
   },
   {id:7,
-    gambar: 'https://dev.pamorstudio.com/assets/img/shop/waras.jpg',
+    img: 'https://dev.pamorstudio.com/assets/img/shop/waras.jpg',
   },
   {id:8,
-    gambar: 'https://dev.pamorstudio.com/assets/img/shop/esa.jpg',
+    img: 'https://dev.pamorstudio.com/assets/img/shop/esa.jpg',
   },
   {id:9,
-    gambar: 'https://dev.pamorstudio.com/assets/img/shop/catleya.jpg',
+    img: 'https://dev.pamorstudio.com/assets/img/shop/catleya.jpg',
   },
   {id:10,
-    gambar:
+    img:
       'https://dev.pamorstudio.com/assets/img/shop/f9fadd411ad9ac7a65c7a2f8438531af.jpg',
   },
 ];
@@ -183,5 +184,53 @@ export const dataDummy = [
       "f_description": null,
       "f_is_featured": 1,
       "f_release_date": null
+  }
+]
+export const MembershipDummy =[
+  {  "m_id": 100,
+  "m_title": "--Pilih Mambership--",
+  "m_price": 150000,
+  "m_token_amount": 1,
+  "m_description": "<table class=\"table table-bordered\"><tbody><tr><td>1 Tiket film perdana PAMOR STUDIO<br></td></tr><tr><td>Gratis 1 $MORE Token<br></td></tr><tr><td>1 Undian premiere setiap ada film baru + akomodasi 1 malam&nbsp; <br></td></tr><tr><td>1 Undian Gala Dinner bersama artis pemeran film produksi PAMOR STUDIO<br></td></tr><tr><td>Keanggotaaan seumur hidup di www.pamorstudio.com<br></td></tr><tr><td>Point Rewards yang bisa diuangkan * <br></td></tr></tbody></table>*S&amp;K berlaku<br>",
+  "images_url": "https://via.placeholder.com/320"},
+  {
+      "m_id": 6,
+      "m_title": "BRONZE Package",
+      "m_price": 150000,
+      "m_token_amount": 1,
+      "m_description": "<table class=\"table table-bordered\"><tbody><tr><td>1 Tiket film perdana PAMOR STUDIO<br></td></tr><tr><td>Gratis 1 $MORE Token<br></td></tr><tr><td>1 Undian premiere setiap ada film baru + akomodasi 1 malam&nbsp; <br></td></tr><tr><td>1 Undian Gala Dinner bersama artis pemeran film produksi PAMOR STUDIO<br></td></tr><tr><td>Keanggotaaan seumur hidup di www.pamorstudio.com<br></td></tr><tr><td>Point Rewards yang bisa diuangkan * <br></td></tr></tbody></table>*S&amp;K berlaku<br>",
+      "images_url": "https://via.placeholder.com/320"
+  },
+  {
+      "m_id": 7,
+      "m_title": "SILVER Package",
+      "m_price": 300000,
+      "m_token_amount": 3,
+      "m_description": "<table class=\"table table-bordered\"><tbody><tr><td>2 Tiket film perdana PAMOR STUDIO<br></td></tr><tr><td>Gratis 3 $MORE Token<br></td></tr><tr><td>2 Undian premiere setiap ada film baru + akomodasi 1 malam&nbsp; <br></td></tr><tr><td>2 Undian Gala Dinner bersama artis pemeran film produksi PAMOR STUDIO<br></td></tr><tr><td>Keanggotaaan seumur hidup di www.pamorstudio.com<br></td></tr><tr><td>Point Rewards yang bisa diuangkan * <br></td></tr></tbody></table>*S&amp;K berlaku<br>",
+      "images_url": "https://via.placeholder.com/320"
+  },
+  {
+      "m_id": 8,
+      "m_title": "GOLD Package",
+      "m_price": 750000,
+      "m_token_amount": 7,
+      "m_description": "<table class=\"table table-bordered\"><tbody><tr><td>5 Tiket film perdana PAMOR STUDIO</td></tr><tr><td>Gratis 7 $MORE Token<br></td></tr><tr><td>5 Undian premiere setiap ada film baru + akomodasi 1 malam&nbsp; </td></tr><tr><td>5 Undian Gala Dinner bersama artis pemeran film produksi PAMOR STUDIO</td></tr><tr><td>Keanggotaaan seumur hidup di www.pamorstudio.com</td></tr><tr><td>Point Rewards yang bisa diuangkan * </td></tr></tbody></table>\r\n*S&amp;K berlaku",
+      "images_url": "https://via.placeholder.com/320"
+  },
+  {
+      "m_id": 9,
+      "m_title": "PLATINUM Package",
+      "m_price": 1200000,
+      "m_token_amount": 11,
+      "m_description": "<table class=\"table table-bordered\"><tbody><tr><td>8 Tiket film perdana PAMOR STUDIO</td></tr><tr><td>Gratis 11 $MORE Token<br></td></tr><tr><td>8 Undian premiere setiap ada film baru + akomodasi 1 malam <br></td></tr><tr><td>8 Undian Gala Dinner bersama artis pemeran film produksi PAMOR STUDIO</td></tr><tr><td>Keanggotaaan seumur hidup di www.pamorstudio.com</td></tr><tr><td>Point Rewards yang bisa diuangkan * </td></tr></tbody></table>*S&amp;K berlaku",
+      "images_url": "https://via.placeholder.com/320"
+  },
+  {
+      "m_id": 10,
+      "m_title": "DIAMOND Package",
+      "m_price": 1500000,
+      "m_token_amount": 15,
+      "m_description": "<table class=\"table table-bordered\"><tbody><tr><td>10 Tiket film perdana PAMOR STUDIO<br></td></tr><tr><td>Gratis 15 $MORE Token<br></td></tr><tr><td>10 Undian Premiere setiap ada film baru + akomodasi 1 malam&nbsp; <br></td></tr><tr><td>10 Undian Gala Dinner bersama artis pemeran film produksi PAMOR STUDIO<br></td></tr><tr><td>10 Undian Movie Production Tour ke lokasi shooting + akomodasi 1 Malam</td></tr><tr><td>Keanggotaaan seumur hidup di www.pamorstudio.com<br></td></tr><tr><td>Point Rewards yang bisa diuangkan * <br></td></tr></tbody></table>*S&amp;K berlaku<br>",
+      "images_url": "https://via.placeholder.com/320"
   }
 ]

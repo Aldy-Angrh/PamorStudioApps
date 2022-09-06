@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   ScrollView,
@@ -10,20 +11,35 @@ import React, {Component} from 'react';
 import WebView from 'react-native-webview';
 import {responsiveWidth} from '../config/utils';
 import {DataCrousel} from '../config/utils';
+import { GetDetailFilm, GetListFilm } from '../action/postSlice';
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux';
 
+function mapStateToProps(state) {
+  console.log('ISI STATE mapStateToPROPS di Profile :', state);
+  return {
+    dataFilm: state.posts.detailFilmData,
+    listFilm: state.posts.filmData
+  };
+}
 export class DetailScreen extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       selectedId: '',
-      dataGambar: DataCrousel,
     };
   }
+
+  componentDidMount(){
+    this.props.GetDetailFilm(this.props.route.params.idFilm)
+    this.props.GetListFilm()
+  }
+
   renderItem = ({item}) => {
     const backgroundColor = item.id === this.state.selectedId ? '#BBB' : '#FFF';
     const color = item.id === this.state.selectedId ? 'white' : 'black';
-
+console.log("ISI",item);
     return (
       <TouchableOpacity
         style={{
@@ -45,37 +61,37 @@ export class DetailScreen extends Component {
           this.props.navigation.navigate('Detail', {idFilm: item.id})
         }>
         <Image
-          source={{uri: item.gambar}}
+          source={{uri: item.f_thumbnail}}
           style={{width: responsiveWidth(400), height: 200, borderRadius: 10}}
         />
-        <Text>{item.id}</Text>
+        <Text style={{color:'#BBB'}}>{item.f_title}</Text>
       </TouchableOpacity>
     );
   };
   render() {
+    console.log(this.props.listFilm);
+    const {dataFilm, listFilm}= this.props
     return (
       <ScrollView style={{backgroundColor: '#130b1e', flex: 1}}>
+        {dataFilm ?(<>
         <View
           style={{
             backgroundColor: '#130b1e',
             width: responsiveWidth(400),
             height: 200,
-            alignSelf:"center"
+            alignSelf:"center",
           }}>
-          <WebView
-            allowsFullscreenVideo={true}
-            source={{
-              uri: 'https://dev.pamorstudio.com/files/uploads/film/3961a1bdcc65977ecf896956717a8f1f.mp4',
-            }}
-            style={{backgroundColor: '#130b1e'}}
-          />
+          <TouchableOpacity style={{zIndex:99, position:'absolute', alignSelf:'center',top:54}}>
+          <Image style={{ zIndex:99, position:'absolute', marginLeft:-30}} source={require('../assets/icons/play.png')}/>
+          </TouchableOpacity>
+          <Image source={{uri: dataFilm.f_thumbnail}} style={{width:responsiveWidth(400), height:200}}/>
         </View>
         <View
           style={{top: 0, zIndex: 99, marginTop: -20, flexDirection: 'row'}}>
           <View>
             <Image
               source={{
-                uri: 'https://dev.pamorstudio.com/assets/img/shop/jump.jpg',
+                uri: dataFilm.f_thumbnail,
               }}
               style={{width: 100, height: 120, borderRadius: 10}}
             />
@@ -91,7 +107,7 @@ export class DetailScreen extends Component {
             }}>
             <View style={{flex: 1, margin: 5}}>
               <Text style={{color: 'white', marginVertical: 10}}>
-                91% Match
+                {dataFilm.f_title}
               </Text>
               <Text  style={{color: '#FFF'}}>2 Season</Text>
             </View>
@@ -132,7 +148,10 @@ export class DetailScreen extends Component {
             borderRadius: 20,
             justifyContent: 'center',
             alignItems: 'center',
-          }}>
+          }}
+          onPress={()=> this.props.navigation.navigate("Play",{idFilm: this.props.route.params.idFilm})}
+
+>
           <Text style={{fontWeight: 'bold', fontSize: 20}}> PLAY </Text>
         </TouchableOpacity>
         <Text style={{color: '#FFF'}}>
@@ -160,15 +179,24 @@ export class DetailScreen extends Component {
         </View>
         <View style={{flexDirection: 'column'}}>
           <FlatList
-            data={this.state.dataGambar}
+            data={listFilm}
             renderItem={this.renderItem}
             keyExtractor={item => item.id}
             extraData={this.state.selectedId}
           />
         </View>
+        </>):<ActivityIndicator size='large' color="#FFF" /> }
       </ScrollView>
     );
   }
 }
-
-export default DetailScreen;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      GetDetailFilm,
+      GetListFilm
+    },
+    dispatch,
+  );
+}
+export default connect(mapStateToProps, mapDispatchToProps) (DetailScreen);
